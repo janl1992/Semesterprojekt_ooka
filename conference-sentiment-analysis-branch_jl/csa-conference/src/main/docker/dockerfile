@@ -1,0 +1,7 @@
+FROM frolvlad/alpine-oraclejdk8:slim
+VOLUME /tmp
+ADD csa-conference-1.0.0-SNAPSHOT.jar ConferenceMicroservice.jar
+EXPOSE 8090
+RUN sh -c 'touch /ConferenceMicroservice.jar'
+ENV JAVA_OPTS=""
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /ConferenceMicroservice.jar" ]

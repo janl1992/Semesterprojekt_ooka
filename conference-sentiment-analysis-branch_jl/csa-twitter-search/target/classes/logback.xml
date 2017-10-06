@@ -1,0 +1,8 @@
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <!--<logger konferenz_name="org.springframework.social.twitter" level="debug"/>-->
+
+    <!--<logger konferenz_name="net.csa.twitter.search.spring.social" level="debug"/>-->
+
+</configuration>

@@ -1,0 +1,12 @@
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/repository/CRUD_operationen.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/rest/ConferenceController.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/ConferenceMicroservice.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/GeoLocation.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/Organisator.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/Person.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/Adresse.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/tweets/Orchestrator.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/Sponsor.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/Veranstaltungsort.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/Twitterhashtag.java
+/Users/janloeffelsender/git/conference-sentiment-analysis_copie_/conference-sentiment-analysis/csa-conference/src/main/java/net/csa/conference/model/Konferenz.java

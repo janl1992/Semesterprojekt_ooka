@@ -1,0 +1,13 @@
+net/csa/conference/model/Konferenz.class
+net/csa/conference/rest/ConferenceController.class
+net/csa/conference/ConferenceMicroservice.class
+net/csa/conference/repository/CRUD_operationen$KonferenzRepository.class
+net/csa/conference/tweets/Orchestrator.class
+net/csa/conference/model/Twitterhashtag.class
+net/csa/conference/model/GeoLocation.class
+net/csa/conference/model/Sponsor.class
+net/csa/conference/repository/CRUD_operationen.class
+net/csa/conference/model/Person.class
+net/csa/conference/model/Veranstaltungsort.class
+net/csa/conference/model/Organisator.class
+net/csa/conference/model/Adresse.class

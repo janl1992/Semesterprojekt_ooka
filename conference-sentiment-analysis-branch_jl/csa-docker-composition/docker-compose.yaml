@@ -1,0 +1,102 @@
+version: '2'
+# storage engines for the microservices of the conference sentiment analysis (csa) application
+services:
+  csa_mongodb_01:
+    container_name: csa_mongodb_01
+    image: mongo:3.4.0
+    ports:
+     - "19017/tcp:27017/tcp"
+    restart: always
+    volumes:
+    - csa_mongodb_01_data:/data/db
+  csa_zookeeper4kafka_01:
+    container_name: csa_zookeeper4kafka_01
+    image: confluentinc/cp-zookeeper:3.0.1
+#    network_mode: host
+    ports:
+     - "19336/tcp:19336/tcp"
+    environment:
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_CLIENT_PORT: 19336
+      ZOOKEEPER_TICK_TIME: 2000
+      ZOOKEEPER_INIT_LIMIT: 5
+      ZOOKEEPER_SYNC_LIMIT: 2
+      ZOOKEEPER_MAX_CLIENT_CNXNS: 20
+      ZOOKEEPER_SERVERS: csa_zookeeper4kafka_01:19337:19338
+    restart: always
+    volumes:
+      - csa_zookeeper4kafka_01_data:/var/lib/zookeeper/data
+      - csa_zookeeper4kafka_01_log:/var/lib/zookeeper/log
+  csa_kafka_01:
+    container_name: csa_kafka_01
+    image: confluentinc/cp-kafka:3.0.1
+#    network_mode: host
+    ports:
+     - "19092/tcp:19092/tcp"
+    depends_on:
+      - csa_zookeeper4kafka_01
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: csa_zookeeper4kafka_01:19336
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:19092
+      KAFKA_LOG_CLEANER_ENABLE: 'false'
+      KAFKA_LOG_RETENTION_MS: -1
+      KAFKA_NUM_PARTITIONS: 1
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+      KAKFA_COMPRESSION_TYPE: 'uncompressed'
+      KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE: 'false'
+      KAFKA_OFFSETS_RETENTION_MINUTES: 99999999
+      KAFKA_OFFSETS_TOPIC_NUM_PARTITIONS: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_OFFSET_METADATA_MAX_BYTES: 20000
+      KAFKA_LOG4J_ROOT_LOGLEVEL: INFO
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,state.change.logger=INFO"
+      KAFKA_TOOLS_LOG4J_LOGLEVEL: INFO
+    restart: always
+    volumes:
+      - csa_kafka_01_data:/var/lib/kafka/data
+
+
+  csa-conference:
+      container_name: csa-conference
+      image: springio/csa-conference
+      ports:
+      - "8080:8090"
+      #publish-all: true
+#      networks:
+#        csadockercomposition_default:
+#          ipv4_address: 0.0.0.0
+      depends_on:
+        - csa_kafka_01
+        - csa_zookeeper4kafka_01
+        - csa_mongodb_01
+
+  csa-twitter-search:
+      container_name: csa-twitter
+      image: springio/csa-twitter-search
+      ports:
+        - "9010:9020"
+      depends_on:
+        - csa-conference
+
+
+volumes:
+  csa_mongodb_01_data:
+  csa_zookeeper4kafka_01_data:
+  csa_zookeeper4kafka_01_log:
+  csa_kafka_01_data:
+  csa-conference:
+  csa-twitter-search:
+
+#networks:
+#  csadockercomposition_default:
+#    driver: bridge
+#      ipam:
+#      driver: default
+#        config:
+#          -
+###            subnet: 0.0.0.0/24
+#networks:
+#  csadockercomposition_default:
+#    external: true
